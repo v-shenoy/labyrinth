@@ -5,3 +5,4 @@ class Cell:
         self.col = col
         self.walls = {"N": True, "E": True, "S": True, "W": True}
         self.vis = False
+        self.color = (222, 224, 226, 255)

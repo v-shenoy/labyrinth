@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 import argparse
 
-from PIL import Image, ImageDraw
+import imageio
 
 from labyrinth.generators.algos import algo_list
 
@@ -19,22 +19,15 @@ if __name__ == "__main__":
                         default = 20, help = "number of cols in the maze")
     parser.add_argument("generator", type = str, choices = algo_list.keys(),
                         help = "specify the generation algorithm")
+    parser.add_argument("-s", "--save", type = str,
+                        default = "temp", help = "specify name for saving")
     args = parser.parse_args()
 
     rows = args.rows
     cols = args.cols
     generator = args.generator
+    name = args.save
 
-    maze = algo_list[generator](rows,cols).gen_maze()
-
-    im = Image.new("RGB", (cols*20, rows*20), (255,255,255,0))
-    draw = ImageDraw.Draw(im)
-    for i in range(rows):
-        for j in range(cols):
-            x = j*20
-            y = i*20
-            if maze[i][j].walls["S"]:
-                draw.line([(x, y + 20), (x + 20, y + 20)], fill = (0,0,0,0))
-            if maze[i][j].walls["E"]:
-                draw.line([(x + 20, y), (x + 20, y + 20)], fill = (0,0,0,0))
-    im.show()
+    images = algo_list[generator](rows,cols).gen_maze()
+    imageio.mimsave(name + '.gif', images, fps = 30)
+    imageio.imsave(name + '.png', images[-1])

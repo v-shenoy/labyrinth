@@ -1,3 +1,6 @@
+import imageio
+from PIL import Image, ImageDraw
+
 from labyrinth.cell import Cell
 
 class Generator:
@@ -15,7 +18,29 @@ class Generator:
             self.grid.append(temp)
 
     def gen_maze(self):
-        pass
+        self.images = []
+        self.im = Image.new("RGB", (self.cols*20, self.rows*20), (222, 224, 226, 255))
+        self.drawer = ImageDraw.Draw(self.im, "RGBA")
+        for i in range(self.rows):
+            for j in range(self.cols):
+                x = j*20
+                y = i*20
+                self.drawer.line([(x, y + 20), (x + 20, y + 20)], fill = (0,0,0, 200))
+                self.drawer.line([(x + 20, y), (x + 20, y + 20)], fill = (0,0,0, 200))    
+
+    def draw(self, curr):
+        x = curr.col * 20
+        y = curr.row * 20
+        self.drawer.rectangle([(x,y), (x + 20,y + 20)], fill = curr.color)
+        if curr.walls["N"]:
+            self.drawer.line([(x, y), (x + 20, y)], fill = (0,0,0, 200))
+        if curr.walls["W"]:
+            self.drawer.line([(x, y), (x, y + 20)], fill = (0,0,0, 200))
+        if curr.walls["S"]:
+            self.drawer.line([(x, y + 20), (x + 20, y + 20)], fill = (0,0,0, 200))
+        if curr.walls["E"]:
+            self.drawer.line([(x + 20, y), (x + 20, y + 20)], fill = (0,0,0, 200))
+        self.images.append(self.im.copy())
         
     def indexable(self, row, col):
         return (0 <= row < self.rows) and (0 <= col < self.cols)
