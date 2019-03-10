@@ -1,5 +1,6 @@
 #! /usr/bin/env python3
 import argparse
+import os
 
 import imageio
 
@@ -31,3 +32,6 @@ if __name__ == "__main__":
     images = algo_list[generator](rows,cols).gen_maze()
     imageio.mimsave(name + '.gif', images, fps = 30)
     imageio.imsave(name + '.png', images[-1])
+
+    os.system("gifsicle -O3 {}.gif -o {}.gif".format(name, name))
+    os.system("gifview -a {}.gif".format(name))
