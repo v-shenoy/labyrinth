@@ -1,10 +1,12 @@
 from labyrinth.generators import (binary_tree, aldous_broder, recursive_backtracker,
-                                  sidewinder)
+                                  sidewinder, hunt_and_kill, prim)
 
 
 algo_list = {
     "binary_tree" : binary_tree.BinaryTree,
     "backtracker": recursive_backtracker.RecursiveBacktracker,
     "aldous_broder": aldous_broder.AldousBroder,
-    "sidewinder": sidewinder.Sidewinder
+    "sidewinder": sidewinder.Sidewinder,
+    "hunt_and_kill" : hunt_and_kill.HuntAndKill,
+    "prims": prim.Prim
 }
