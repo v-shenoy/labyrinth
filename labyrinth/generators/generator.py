@@ -1,4 +1,3 @@
-import imageio
 from PIL import Image, ImageDraw
 
 from labyrinth.cell import Cell
@@ -19,7 +18,7 @@ class Generator:
 
     def gen_maze(self):
         self.images = []
-        self.im = Image.new("RGB", (self.cols*20, self.rows*20), (222, 224, 226, 255))
+        self.im = Image.new("RGB", (self.cols*20+1, self.rows*20+1), (222, 224, 226, 255))
         self.drawer = ImageDraw.Draw(self.im, "RGBA")
         for i in range(self.rows):
             for j in range(self.cols):

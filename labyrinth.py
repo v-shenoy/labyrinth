@@ -30,7 +30,8 @@ if __name__ == "__main__":
     name = args.save
 
     images = algo_list[generator](rows,cols).gen_maze()
-    imageio.mimsave(name + '.gif', images, fps = 30)
+    fps = (20 if generator == "recursive_division" else 30)
+    imageio.mimsave(name + '.gif', images, fps = fps)
     imageio.imsave(name + '.png', images[-1])
 
     os.system("gifsicle -O3 {}.gif -o {}.gif".format(name, name))

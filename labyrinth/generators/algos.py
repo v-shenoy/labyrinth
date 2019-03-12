@@ -1,5 +1,5 @@
 from labyrinth.generators import (binary_tree, aldous_broder, recursive_backtracker,
-                                  sidewinder, hunt_and_kill, prim)
+                                  sidewinder, hunt_and_kill, prim, recursive_division)
 
 
 algo_list = {
@@ -8,5 +8,6 @@ algo_list = {
     "aldous_broder": aldous_broder.AldousBroder,
     "sidewinder": sidewinder.Sidewinder,
     "hunt_and_kill" : hunt_and_kill.HuntAndKill,
-    "prims": prim.Prim
+    "prims": prim.Prim,
+    "recursive_division": recursive_division.RecursiveDivision
 }
